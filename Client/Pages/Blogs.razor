@@ -1,0 +1,34 @@
+﻿@page "/blogs"
+@using Blazor_WASM.Shared
+@inject HttpClient Http
+
+
+
+<PageTitle>Blogs</PageTitle>
+<h1>Blogs</h1>
+
+@if (blogs == null) {
+  <p><em>Loading...</em></p>
+} else {
+  @foreach( var blog in blogs ) {
+    <div class="card" data-id="@blog.UserId">
+      <div>
+        <h2>@blog.Title</h2>
+        <h3>@blog.Username</h3>
+        <b>@blog.Date.ToShortDateString()</b>
+      </div>
+      <div>
+        <p>@blog.Content</p>
+      </div>
+    </div>
+  }
+}
+
+
+@code {
+  private Blog[]? blogs;
+
+  protected override async Task OnInitializedAsync() {
+    blogs = await Http.GetFromJsonAsync<Blog[]>("Blog");
+  }
+}
