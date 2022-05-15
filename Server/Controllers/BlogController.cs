@@ -3,13 +3,14 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Blazor_WASM.Server.Controllers;
 [ApiController]
-[Route("[controller]")]
+[Route("/api/[controller]")]
 public class BlogController : ControllerBase {
 
-  private static readonly Blog[] fakeBlogs = new Blog[] {
+  private List<Blog> fakeBlogs = new() {
     new Blog() { Title = "New post", Content = "First Post", UserId = "1234", Username = "FirstUser" },
     new Blog() { Title = "My Second post", Content = "Second One!!", UserId = "123", Username = "Second User" },
-    new Blog() { Title = "Hello world", Content = "Well hello world", UserId = "1234", Username = "FirstUser" }, };
+    new Blog() { Title = "Hello world", Content = "Well hello world", UserId = "1234", Username = "FirstUser" },
+  };
 
   private readonly ILogger<BlogController> _logger;
 
@@ -18,7 +19,21 @@ public class BlogController : ControllerBase {
   }
 
   [HttpGet]
-  public IEnumerable<Blog> Get() {
+  public async Task<IEnumerable<Blog>> GetAsync() {
     return fakeBlogs.ToArray();
+  }
+
+  [HttpPost]
+  public async Task<Blog> PostAsync(CreateBlogDto blog) {
+    Blog newPost = new() {
+      Title = blog.Title,
+      Content = blog.Content,
+      UserId = blog.UserId,
+      Username = blog.Username,
+      Date = DateTime.Now,
+    };
+    fakeBlogs.Add(newPost);
+
+    return newPost;
   }
 }

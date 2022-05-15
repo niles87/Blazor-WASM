@@ -2,23 +2,21 @@
 @using Blazor_WASM.Shared
 @inject HttpClient Http
 
-
-
 <PageTitle>Blogs</PageTitle>
 <h1>Blogs</h1>
 
-@if (blogs == null) {
+@if ( blogs == null ) {
   <p><em>Loading...</em></p>
 } else {
-  @foreach( var blog in blogs ) {
+  @foreach ( var blog in blogs ) {
     <div class="card" data-id="@blog.UserId">
       <div>
-        <h2>@blog.Title</h2>
-        <h3>@blog.Username</h3>
+        <h2 class="card-title">@blog.Title</h2>
+        <h3 class="card-subtitle text-muted">@blog.Username</h3>
         <b>@blog.Date.ToShortDateString()</b>
       </div>
       <div>
-        <p>@blog.Content</p>
+        <p class="card-text">@blog.Content</p>
       </div>
     </div>
   }
@@ -29,6 +27,6 @@
   private Blog[]? blogs;
 
   protected override async Task OnInitializedAsync() {
-    blogs = await Http.GetFromJsonAsync<Blog[]>("Blog");
+    blogs = await Http.GetFromJsonAsync<Blog[]>("/api/blog");
   }
 }

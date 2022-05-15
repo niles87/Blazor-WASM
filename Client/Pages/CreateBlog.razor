@@ -1,0 +1,39 @@
+﻿@page "/blogs/new"
+@using Blazor_WASM.Shared
+@inject HttpClient Http
+
+<PageTitle>New Blog</PageTitle>
+<h3>CreateBlog</h3>
+
+<form @onsubmit="CreatePostAsync">
+  <label class="form-label" for="blog-title">Title</label>
+  <input class="form-control" type="text" id="blog-title" name="title" @bind="@InputValue" @oninput="GetInputValue" />
+  <label class="form-label" for="content">Body</label>
+  <textarea class="form-control" id="content" @bind="@TextValue" @oninput="GetTextValue"></textarea>
+  <input type="submit" value="Submit" class="btn btn-success" />
+</form>
+
+@code {
+  private string? InputValue { get; set; } = "";
+  private string? TextValue { get; set; } = "";
+
+  private void GetInputValue(ChangeEventArgs e) {
+    InputValue = ( string? )e.Value;
+  }
+
+  private void GetTextValue(ChangeEventArgs e) {
+    TextValue = ( string? )e.Value;
+  }
+
+  protected async Task CreatePostAsync() {
+    CreateBlogDto newPost = new() {
+        Title = InputValue == null || InputValue.Length < 1 ? "Missing Title" : InputValue,
+        Content = TextValue == null || TextValue.Length < 1 ? "Missing Content" : TextValue,
+        UserId = new Guid().ToString(),
+        Username = "Random name"
+      };
+
+    var res = await Http.PostAsJsonAsync("/api/blog/", newPost);
+    Console.WriteLine(res);
+  }
+}

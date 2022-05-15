@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32421.90
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blazor-WASM.Server", "Server\Blazor-WASM.Server.csproj", "{4DE8F38E-40C2-4F26-833D-10679219FA56}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazor-WASM.Server", "Server\Blazor-WASM.Server.csproj", "{4DE8F38E-40C2-4F26-833D-10679219FA56}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blazor-WASM.Client", "Client\Blazor-WASM.Client.csproj", "{D4F75183-D36D-4DAC-9540-A3007F189BA4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazor-WASM.Client", "Client\Blazor-WASM.Client.csproj", "{D4F75183-D36D-4DAC-9540-A3007F189BA4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blazor-WASM.Shared", "Shared\Blazor-WASM.Shared.csproj", "{B8EFD4EF-C075-44D6-9F7C-11CC6C07AEDD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazor-WASM.Shared", "Shared\Blazor-WASM.Shared.csproj", "{B8EFD4EF-C075-44D6-9F7C-11CC6C07AEDD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
